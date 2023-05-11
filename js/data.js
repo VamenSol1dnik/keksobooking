@@ -10,7 +10,6 @@ export function GetOffer(i){
 
   let location = getLocation();
   this.location = location;
-
   this.offer = {};
   this.offer.title = offerSettings.titles[getrandomNumber(0, offerSettings.titles.length -1)];
   this.offer.address = location;

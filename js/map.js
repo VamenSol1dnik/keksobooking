@@ -1,4 +1,4 @@
-import { offers } from './data.js';
+// import { offers } from './data.js';
 import { renderOffer } from "./cards.js";
 import { offerSettings } from "./settings.js";
 
@@ -30,10 +30,11 @@ function updateCoordinates(event){
   addressInput.value = `${event.target.getLatLng().lat} ${event.target.getLatLng().lng}`
 }
 
-export function renderMap(){
+let map;
+export function renderMap(offers){
   disableForm();
 
-  let map = L.map('map', {
+  map = L.map('map', {
     center: offerSettings.mapCenter,
     zoom: offerSettings.mapZoom,
   });
@@ -56,11 +57,19 @@ function renderMainMarker(map) {
   mainMarker.on('drag', updateCoordinates);
 }
 
-function renderMapOffers(map) {
+let allOffersLayer;
+function renderMapOffers(map, offers) {
   const mapMarkersData = [];
   for (let i = 0; i < offers.length; i++){
     let popupContent = renderOffer(offers[i]);
       mapMarkersData.push(L.marker([offers[i].location.x, offers[i].location.y], {icon: customMarkerIconSmall}).bindPopup(popupContent));
     }
-  L.featureGroup(mapMarkersData).addTo(map);
+  allOffersLayer = L.featureGroup(mapMarkersData).addTo(map);
 }
+
+export function reloadMapMarkers(offers){
+    if (map.hasLayer(allOffersLayer)) {
+      map.removeLayer(allOffersLayer);
+    }
+    renderMapOffers(map, offers);
+  }

@@ -19,6 +19,59 @@ export const offerSettings = {
             flat: 1000,
             bungalow: 0,
           },
+          priceLevel: {
+            low: 2000,
+            middle: 5000,
+            high: 10000,
+          },
+          roomsTranslations: {
+            1: {
+              en: '1 room',
+              ua: '1 кімната'
+            },
+            2: {
+              en: '2 rooms',
+              ua: '2 кімнати'
+            },
+            3: {
+              en: '3 rooms',
+              ua: '3 кімнати'
+            },
+            4: {
+              en: 'Parking',
+              ua: 'Паркінг'
+            },
+            5: {
+              en: 'Big parking',
+              ua: 'Великий паркінг'
+            }
+          },
+          guestsTranslations: {
+            1: {
+              en: 'for 1 guest',
+              ua: 'для 1 гостя'
+            },
+            2: {
+              en: 'for 2 guests',
+              ua: 'для 2 гостей'
+            },
+            3: {
+              en: 'for 3 guests',
+              ua: 'для 3 гостей'
+            },
+            4: {
+              en: 'for 1 car',
+              ua: 'для 1 авто'
+            },
+            5: {
+              en: 'for 2 cars',
+              ua: 'для 2 авто'
+            },
+            6: {
+              en: 'for a truck',
+              ua: 'для Вантажівка'
+            }
+          },
           guestsFromRooms: {
             0: [0],
             1: [1,2],
@@ -33,8 +86,8 @@ export const offerSettings = {
           quantity: 10,
 
     price: {
-      min: 1000,
-      max: 8000,
+      min: 20,
+      max: 20000,
     },
     checkins: ['12:00',' 13:00', '14:00'],
     checkouts: ['12:00',' 13:00', '14:00'],
@@ -54,11 +107,11 @@ export const offerSettings = {
     },
     rooms: {
       min: 1,
-      max: 4,
+      max: 5,
     },
     guests: {
       min: 1,
-      max: 4,
+      max: 6,
     },
     location: {
       x: {
