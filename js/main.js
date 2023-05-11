@@ -1,5 +1,11 @@
-import { offers } from './data.js';
-import {renderOffers} from "./cards.js";
+import { offerTypeListener, offerCheckinListener, formSubmit } from "./form.js";
+import { renderMap } from "./map.js";
 
+const form = document.querySelector('.ad-form');
 
-renderOffers(offers);
+offerTypeListener();
+offerCheckinListener();
+
+renderMap();
+
+form.addEventListener('submit', formSubmit);

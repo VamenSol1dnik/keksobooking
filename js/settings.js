@@ -1,8 +1,37 @@
 export const offerSettings = {
+
+    mapCenter: [35.6804334,139.7689218],
+    mapZoom: 13,
+    mapMaxZoom: 13,
     authorsNames: ['Mike','Bob','Dany'],
     titles: ['Good apartment','Nice green house','Hotel room', 'Duplex for all', 'Be my guest', 'Party house', 'Small room for the rest', 'Grandmas penthouse'],
     quantity: 10,
-    offerType: ['palace', 'flat', 'house', 'bungalow'],
+    offerType: [
+        {name: 'palace',en: 'Palace', ua: 'Палац'},
+        {name: 'flat',en: 'Apartment', ua: 'Квартира'},
+        {name: 'house',en: 'House', ua: 'Будинок'},
+        {name: 'bungalow',en: 'Bungalow', ua: 'Бунгало'}],
+
+        offerTypePrice: {
+            default: 0,
+            palace: 10000,
+            house: 5000,
+            flat: 1000,
+            bungalow: 0,
+          },
+          guestsFromRooms: {
+            0: [0],
+            1: [1,2],
+            2: [1,2,3],
+            3: [1,2,3],
+            4: [4],
+            5: [4,5,6],
+          },
+          // temporary data base
+          authorsNames: ['Ben','joe','Sam'],
+          titles: ['Good apartment','Nice green house','Hotel room', 'Duplex for all', 'Be my guest', 'Party house', 'Small room for the rest', 'Grandmas penthouse'],
+          quantity: 10,
+
     price: {
       min: 1000,
       max: 8000,
