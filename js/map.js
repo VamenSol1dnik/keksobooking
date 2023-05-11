@@ -1,6 +1,7 @@
 import { offers } from './data.js';
 import { renderOffer } from "./cards.js";
 import { offerSettings } from "./settings.js";
+
 const formSection = document.querySelector('.notice');
 const addressInput = document.querySelector('#address');
 
@@ -40,18 +41,19 @@ export function renderMap(){
   map.whenReady(enableForm);
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: mapMaxZoom,
+    maxZoom: offerSettings, mapMaxZoom,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
 
   renderMainMarker(map);
   renderMapOffers(map);
-
 }
+
+
 function renderMainMarker(map) {
   let mainMarker = L.marker(offerSettings.mapCenter, {icon: customMarkerIcon, draggable: true}).addTo(map);
   mainMarker.bindPopup("Choose Location").openPopup();
-  mainMarker.on('dragend', updateCoordinates);
+  mainMarker.on('drag', updateCoordinates);
 }
 
 function renderMapOffers(map) {
@@ -60,5 +62,5 @@ function renderMapOffers(map) {
     let popupContent = renderOffer(offers[i]);
       mapMarkersData.push(L.marker([offers[i].location.x, offers[i].location.y], {icon: customMarkerIconSmall}).bindPopup(popupContent));
     }
-  const markersGroup = L.featureGroup(mapMarkersData).addTo(map);
+  L.featureGroup(mapMarkersData).addTo(map);
 }
