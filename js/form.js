@@ -1,5 +1,5 @@
 import { offerSettings } from "./settings.js";
-import { getRandomArrayData, getrandomNumber } from "./utilites.js";
+import { getrandomNumber } from "./utilites.js";
 import { reloadMapMarkers } from "./map.js";
 
 const titleInput = document.querySelector('#title');
@@ -17,6 +17,9 @@ const featuresInputs = document.querySelectorAll('.ad-form__element.features .fe
 
 function resetFrom(){
   titleInput.value = '';
+  photos = [];
+  avatarPreview.src = offerSettings.noPictureUrl;
+  photosPreview.innerHTML = '';
 }
 
 titleInput.addEventListener('change',validateTitle);
@@ -90,12 +93,56 @@ function onTimeInChange(event) {
     timeinInput.addEventListener('change', onTimeInChange);
     timeoutInput.addEventListener('change', onTimeOutChange);
   }
+
+  let image64bit = '';
+
+avatarInput.addEventListener('change',avatarUpload);
+function avatarUpload(event) {
+  const fileUpload = event.target.files[0];
+
+  const reader = new FileReader();
+  reader.readAsDataURL(fileUpload);
+  reader.onloadend = function () {
+    image64bit = reader.result;
+    avatarPreview.src = reader.result;
+  }
+}
+
+let photos = [];
+photosInput.addEventListener('change',photosUpload);
+function photosUpload(event) {
+
+  for(let i = 0; i < event.target.files.length; i++){
+
+    const fileUpload = event.target.files[i];
+    const reader = new FileReader();
+    reader.readAsDataURL(fileUpload);
+    reader.onloadend = function () {
+
+      photos.push(reader.result);
+      console.log(photos);
+
+      const photosFragment = new DocumentFragment();
+
+      for(let p = 0; p < photos.length; p++) {
+        const img = document.createElement("img");
+        img.src = photos[p];
+        img.alt = '';
+        img.classList.add('ad-form__photo');
+        photosFragment.appendChild(img);
+      }
+
+      photosPreview.innerHTML = '';
+      photosPreview.append(photosFragment);
+    }
+  }
+}
   
   function newOfferPost(){
     const offerPost = {}
+
     offerPost.author = offerSettings.authorsNames[getrandomNumber(0, offerSettings.authorsNames.length -1)];
-    let avatarIndex = getrandomNumber(offerSettings.avatarsQuantity.min,offerSettings.avatarsQuantity.max);
-    offerPost.avatarUrl = `./img/avatars/user${avatarIndex<10 ? '0'+avatarIndex : avatarIndex}.png`;
+    offerPost.avatarUrl = image64bit;
   
     const addressCoordinates = addressInput.value.split(' ');
     offerPost.location = {}
@@ -125,7 +172,7 @@ function onTimeInChange(event) {
     });
   
     offerPost.offer.description = descriptionInput.value;
-    offerPost.offer.photos = getRandomArrayData(offerSettings.photos, getrandomNumber(1, offerSettings.photos.length));
+    offerPost.offer.photos = getRandomArrayData.photos;
     return offerPost;
   }
 

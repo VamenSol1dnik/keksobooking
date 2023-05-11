@@ -31,10 +31,8 @@ function updateFilterSettings(inputTarget, inputName, inputValue) {
     case 'type':
     case 'rooms':
     case 'guests':
-      filterSettings[inputName] = inputValue;
-      break;
     case 'price':
-      filterSettings.price = inputValue;
+      filterSettings[inputName] = inputValue;
       break;
     case 'wifi':
     case 'dishwasher':

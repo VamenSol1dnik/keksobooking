@@ -1,3 +1,4 @@
+import { offerSettings } from "./settings.js";
 
 let cardTemplate = document.querySelector('#card');
 let cardPhotoTemplate = document.querySelector('#card-photo');
